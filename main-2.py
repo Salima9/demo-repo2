@@ -22,7 +22,7 @@ from  kivymd.uix.behaviors import FakeRectangularElevationBehavior
 from  kivy.uix.screenmanager import NoTransition
 import re
 import threading
-from main_classes import LoginWindow, ProfileCard, ProfilePage, NavBar, MessageScreen, ChatScreen, ChatListItem, ChatBubble, Message, login_page, popFun, P, PopupWindow, VerificationPage, SearchPopupMenu, MatchingPage, ListWithImage  
+from main_classes import LoginWindow, ProfileCard, ProfilePage, NavBar, MessageScreen, ChatScreen, ChatListItem, ChatBubble, Message, login_page, popFun, P, PopupWindow, VerificationPage, MatchingPage, ListWithImage  
 from kivy.properties import BooleanProperty, DictProperty, ListProperty, NumericProperty, ObjectProperty, OptionProperty, StringProperty
 from kivy.core.window import Window
 from kivymd.uix.picker import MDThemePicker
@@ -321,27 +321,27 @@ class MainApp(MDApp):
         self.root.get_screen("home_page").ids.cant_c2.text = (course_lst[4])
     
     """Search"""
-    def display_search_name(self): 
-        search_student_name = self.sm.get_screen('home_page').ids.search_profile.text
-        #print(search_student_name)
-        display_name = SearchPopupMenu().search_student(search_student_name)
-        return display_name
+    # def display_search_name(self): 
+    #     search_student_name = self.sm.get_screen('home_page').ids.search_profile.text
+    #     #print(search_student_name)
+    #     display_name = SearchPopupMenu().search_student(search_student_name)
+    #     return display_name
     
-    def get_search_courses(self): 
-        search_student_name = self.sm.get_screen('home_page').ids.search_profile.text
-        can_course = SearchPopupMenu().get_search_student_courses(search_student_name)
-        #print(can_course)
-        return can_course
+    # def get_search_courses(self): 
+    #     search_student_name = self.sm.get_screen('home_page').ids.search_profile.text
+    #     can_course = SearchPopupMenu().get_search_student_courses(search_student_name)
+    #     #print(can_course)
+    #     return can_course
     
-    def display_search_profile(self): 
-        self.root.get_screen("search_profile").ids.search_name.text = str(self.display_search_name())
-        course_lst = self.get_search_courses()
-        #print(course_lst) 
-        self.root.get_screen("search_profile").ids.search_can_courses_1.text = (course_lst[0])
-        self.root.get_screen("search_profile").ids.search_can_courses_2.text = (course_lst[1])
-        self.root.get_screen("search_profile").ids.search_can_courses_3.text = (course_lst[2])
-        self.root.get_screen("search_profile").ids.search_cant_courses_1.text = (course_lst[3])
-        self.root.get_screen("search_profile").ids.search_cant_courses_2.text = (course_lst[4])
+    # def display_search_profile(self): 
+    #     self.root.get_screen("search_profile").ids.search_name.text = str(self.display_search_name())
+    #     course_lst = self.get_search_courses()
+    #     #print(course_lst) 
+    #     self.root.get_screen("search_profile").ids.search_can_courses_1.text = (course_lst[0])
+    #     self.root.get_screen("search_profile").ids.search_can_courses_2.text = (course_lst[1])
+    #     self.root.get_screen("search_profile").ids.search_can_courses_3.text = (course_lst[2])
+    #     self.root.get_screen("search_profile").ids.search_cant_courses_1.text = (course_lst[3])
+    #     self.root.get_screen("search_profile").ids.search_cant_courses_2.text = (course_lst[4])
 
     def get_email_lst(self): 
         search_word_1 = self.sm.get_screen('home_page').ids.search_profile.text     
@@ -377,26 +377,35 @@ class MainApp(MDApp):
             else:
                 user['Name'] = user['Email']
             mydb.commit()
-        print(entries)
+        #print(entries)
         return entries
-        
     
-    # def get_names_lst(self): 
-    #     search_word_1 = self.sm.get_screen('home_page').ids.search_profile.text     
-    #     users_email = self.get_email_lst()
-    #     for user in users_email:
-    #         search_email = f"select * from courses where '{user}' IN(CanCourse_1, CanCourse_2, CanCourse_3)"
+    
+    
 
-    #     c.execute(search_email)
-    #     search_email_1 = c.fetchall()
-    #     print(search_email)
-    #     mydb.commit()
-    #     #student_email = list(map(lambda d: d['Email'], search_email_1))
-    #     #student_email_2 = student_email[0]
+    # def display_search_name(self): 
+    #     search_student_name = self.sm.get_screen('search_list_page').ids.container.text
 
-    #     print(search_email_1)
-
-        
+    #     print(search_student_name)
+    #     display_name = SearchPopupMenu().search_student(search_student_name)
+    #     return display_name
+    
+    # def get_search_courses(self): 
+    #     search_student_name = self.sm.get_screen('search_list_page').ids.container.text
+    #     can_course = SearchPopupMenu().get_search_student_courses(search_student_name)
+    #     #print(can_course)
+    #     return can_course
+    
+    # def display_search_profile(self): 
+    #     self.root.get_screen("search_profile").ids.search_name.text = str(self.display_search_name())
+    #     course_lst = self.get_search_courses()
+    #     #print(course_lst) 
+    #     self.root.get_screen("search_profile").ids.search_can_courses_1.text = (course_lst[0])
+    #     self.root.get_screen("search_profile").ids.search_can_courses_2.text = (course_lst[1])
+    #     self.root.get_screen("search_profile").ids.search_can_courses_3.text = (course_lst[2])
+    #     self.root.get_screen("search_profile").ids.search_cant_courses_1.text = (course_lst[3])
+    #     self.root.get_screen("search_profile").ids.search_cant_courses_2.text = (course_lst[4])
+            
         
 
     def process_search_page(self):

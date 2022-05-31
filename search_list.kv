@@ -12,6 +12,7 @@ MDScreen:
             MDList:
                 id: container
                 on_touch_down: 
+                    app.chatlist_builder()
                     app.root.current = 'msg-screen'
     MDFloatingActionButton: 
         icon: "arrow-left"

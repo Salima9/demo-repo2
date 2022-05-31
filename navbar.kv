@@ -25,7 +25,7 @@ MDScreen:
                             
                             MDLabel: 
                                 font_name: "fonts\Poppins\Poppins""-Medium.ttf"
-                                text: "Matchning page"
+                                text: "Post page"
                                 font_size: "15sp"
                                 pos_hint: {"center_x": .56, "center_y": .82}
                                 color: rgba(71, 92, 119, 255)
@@ -149,7 +149,7 @@ MDScreen:
                                 app.root.current = 'update_profile_page'
                                 root.manager.transition.direction = 'right'
                         
-                        MDFloatingActionButton:
+                        MDFillRoundFlatButton:
                             text: "Log out"
                             font_size: 10
                             pos_hint: {"center_x": .5, "center_y": .2 }
@@ -228,13 +228,13 @@ MDScreen:
             hint_text: "Search"
             foreground_color: 1, 0, 1, 1
             size_hint_x: None
-            width: 150
-            pos_hint: {"center_x": 0.55, "top": 1}
+            width: 80
+            pos_hint: {"center_x": 0.7, "top": 1}
             
         MDIconButton: 
             id: search_profile_button
             icon: 'magnify'
-            pos_hint: {"center_x": 0.8, "top": 1}
+            pos_hint: {"center_x": 0.9, "top": 1.01}
             ripple_scale: 0
             user_font_size: "20sp"
             theme_text_color: "Custom"
