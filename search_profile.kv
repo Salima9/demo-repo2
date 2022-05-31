@@ -1,0 +1,112 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition 
+
+MDScreen: 
+    id: search_profile
+    name: "search_profile"
+      
+    MDFloatLayout: 
+        md_bg_color: rgba(246, 250, 255, 255)
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"center_x": 0.8, "top": 1}
+            user_font_size: "20sp"
+            theme_text_color: "Custom"
+            text_color: rgba(71, 92, 119, 255)
+            on_release: 
+                app.root.current = 'home_page'
+                
+        ProfileCard:
+            size_hint_y: .90
+            pos_hint: {"center_y": .7}
+            elevation: 6
+            md_bg_color: 1, 1, 1, 1
+            radius: [0, 0, 20, 20]
+            
+            MDLabel: 
+                font_name: "fonts\Poppins\Poppins""-Medium.ttf"
+                text: "My Profile"
+                font_size: "15sp"
+                pos_hint: {"center_x": .56, "center_y": .82}
+                color: rgba(71, 92, 119, 255)
+            Image:
+                size_hint_y: None
+                source: "pics/profile-pic.png"
+                width: 80
+                allow_stretch: True 
+                pos_hint: {"center_x": .5, "center_y": .62}
+            
+            MDLabel:
+                id: search_name
+                font_name: "fonts\Poppins\Poppins""-Bold.ttf" 
+                text: "Default"
+                font_size: "20sp"
+                pos_hint: {"center_y": .44}
+                halign: "center"
+                color: rgba(71, 92, 119, 255)
+            
+            MDLabel: 
+                text: "Courses I can help with"
+                font_size: "20sp"
+                pos_hint: {"center_y": .36}
+                halign: "center"
+                color: rgba(71, 92, 119, 255)
+            
+            MDGridLayout: 
+                rows: 2
+                cols: 3
+                size_hint: .6, .12
+                pos_hint: {"center_x": .5, "center_y": .3}
+                MDLabel: 
+                    text: "Default"
+                    id: search_can_courses_1
+                    halign: "center"
+                    font_size: "12sp"
+                    color: rgba(71, 92, 119, 255)
+                MDLabel: 
+                    text: "Default"
+                    id: search_can_courses_2
+                    halign: "center"
+                    font_size: "12sp"
+                    color: rgba(71, 92, 119, 255)
+                MDLabel: 
+                    text: "Default"
+                    id: search_can_courses_3
+                    halign: "center"
+                    font_size: "12sp"
+                    color: rgba(71, 92, 119, 255)
+            
+            MDLabel: 
+                text: "Courses I need help with"
+                font_size: "20sp"
+                pos_hint: {"center_y": .15}
+                halign: "center"
+                color: rgba(71, 92, 119, 255)
+            
+            MDGridLayout: 
+                rows: 2
+                cols: 3
+                size_hint: .85, .12
+                pos_hint: {"center_x": .5, "center_y": .10}
+                MDLabel: 
+                    text: "Default"
+                    id: search_cant_courses_1
+                    halign: "center"
+                    font_size: "12sp"
+                    color: rgba(71, 92, 119, 255)
+                MDLabel: 
+                    text: "Default"
+                    id: search_cant_courses_2
+                    halign: "center"
+                    font_size: "12sp"
+                    color: rgba(71, 92, 119, 255)
+            
+                
+        MDFillRoundFlatButton:
+            text: "Start a chat"
+            font_size: 15
+            pos_hint: {"center_x": .5, "center_y": .2 }
+
+            on_press: 
+                app.chatlist_builder()
+                app.root.current = 'msg-screen'
+                root.manager.transition.direction = 'right'

@@ -1,0 +1,244 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition 
+MDScreen:
+    name:'home_page'
+    id: home_page
+    MDFloatLayout: 
+        md_bg_color: 1, 1, 1, 1
+        ScreenManager: 
+            id: scr 
+            transition: NoTransition()
+            
+            MDScreen: 
+                id: matchning
+                name: 'home'
+                ScrollView:
+                    bar_width: 0     
+                    MDFloatLayout: 
+                        orientation: 'vertical'
+                        md_bg_color: rgba(246, 250, 255, 255)
+                        ProfileCard:
+                            size_hint_y: .65
+                            pos_hint: {"center_y": .7}
+                            elevation: 6
+                            md_bg_color: 1, 1, 1, 1
+                            radius: [0, 0, 20, 20]
+                            
+                            MDLabel: 
+                                font_name: "fonts\Poppins\Poppins""-Medium.ttf"
+                                text: "Matchning page"
+                                font_size: "15sp"
+                                pos_hint: {"center_x": .56, "center_y": .82}
+                                color: rgba(71, 92, 119, 255)
+                            Image:
+                                size_hint_y: None
+                                source: "pics/profile-pic.png"
+                                width: 80
+                                allow_stretch: True 
+                                pos_hint: {"center_x": .5, "center_y": .62}
+                MDLabel: 
+                    text: "Home"
+                    pos_hint: {"center_y": .5}
+                    halign: "center"
+            
+            MDScreen: 
+                name: 'search'
+                MDLabel: 
+                    text: "Search"
+                    pos_hint: {"center_y": .5}
+                    halign: "center"
+            
+            MDScreen: 
+                id: profile_screen
+                name: "profile_screen"
+                ScrollView:
+                    bar_width: 0     
+                    MDFloatLayout: 
+                        md_bg_color: rgba(246, 250, 255, 255)
+                        ProfileCard:
+                            size_hint_y: .90
+                            pos_hint: {"center_y": .8}
+                            elevation: 6
+                            md_bg_color: 1, 1, 1, 1
+                            radius: [0, 0, 20, 20]
+                            
+                            MDLabel: 
+                                font_name: "fonts\Poppins\Poppins""-Medium.ttf"
+                                text: "My Profile"
+                                font_size: "15sp"
+                                pos_hint: {"center_x": .56, "center_y": .82}
+                                color: rgba(71, 92, 119, 255)
+                            # Image:
+                            #     size_hint_y: None
+                            #     source: "pics/profile-pic.png"
+                            #     width: 80
+                            #     allow_stretch: True 
+                            #     pos_hint: {"center_x": .5, "center_y": .62}
+                            
+                            MDLabel:
+                                id: my_name
+                                font_name: "fonts\Poppins\Poppins""-Bold.ttf" 
+                                text: "Default"
+                                font_size: "20sp"
+                                pos_hint: {"center_y": .44}
+                                halign: "center"
+                                color: rgba(71, 92, 119, 255)
+                            
+                            MDLabel: 
+                                text: "Courses I can help with"
+                                font_size: "20sp"
+                                pos_hint: {"center_y": .36}
+                                halign: "center"
+                                color: rgba(71, 92, 119, 255)
+                            
+                            MDGridLayout: 
+                                rows: 2
+                                cols: 3
+                                size_hint: .6, .12
+                                pos_hint: {"center_x": .5, "center_y": .3}
+                                MDLabel: 
+                                    text: "Default"
+                                    id: can_c1
+                                    halign: "center"
+                                    font_size: "12sp"
+                                    color: rgba(71, 92, 119, 255)
+                                MDLabel: 
+                                    text: "Default"
+                                    id: can_c2
+                                    halign: "center"
+                                    font_size: "12sp"
+                                    color: rgba(71, 92, 119, 255)
+                                MDLabel: 
+                                    text: "Default"
+                                    id: can_c3
+                                    halign: "center"
+                                    font_size: "12sp"
+                                    color: rgba(71, 92, 119, 255)
+                            
+                            MDLabel: 
+                                text: "Courses I need help with"
+                                font_size: "20sp"
+                                pos_hint: {"center_y": .15}
+                                halign: "center"
+                                color: rgba(71, 92, 119, 255)
+                            
+                            MDGridLayout: 
+                                rows: 2
+                                cols: 3
+                                size_hint: .85, .12
+                                pos_hint: {"center_x": .5, "center_y": .10}
+                                MDLabel: 
+                                    text: "Default"
+                                    id: cant_c1
+                                    halign: "center"
+                                    font_size: "12sp"
+                                    color: rgba(71, 92, 119, 255)
+                                MDLabel: 
+                                    text: "Default"
+                                    id: cant_c2
+                                    halign: "center"
+                                    font_size: "12sp"
+                                    color: rgba(71, 92, 119, 255)
+                            
+                                
+                        MDFillRoundFlatButton:
+                            text: "Change Profile Info"
+                            font_size: 15
+                            pos_hint: {"center_x": .5, "center_y": .3 }
+        
+                            on_press: 
+                                app.root.current = 'update_profile_page'
+                                root.manager.transition.direction = 'right'
+                        
+                        MDFloatingActionButton:
+                            text: "Log out"
+                            font_size: 10
+                            pos_hint: {"center_x": .5, "center_y": .2 }
+        
+                            on_press: 
+                                app.root.current = 'login'
+                                root.manager.transition.direction = 'right'
+        
+        # MDIconButton: 
+        #     id: search_profile
+        #     icon: 'magnify'
+        #     pos_hint: {"center_x": 0.7, "top": 1}
+        #     ripple_scale: 0
+        #     user_font_size: "20sp"
+        #     theme_text_color: "Custom"
+        #     text_color: 0, 0, 0, 1
+        #     on_release: 
+        #         app.search_menu.open()
+
+                               
+        NavBar: 
+            size_hint: .60, .1
+            pos_hint: {"center_x": .5, "center_y": .1}
+            elevation: 10 
+            md_bg_color: 1, 1, 1, 1
+            radius: [16]
+            MDGridLayout: 
+                cols: 3
+                size_hint_x: .9 
+                spacing: 4
+                pos_hint: {"center_x": .5, "center_y": .5 }
+                MDIconButton: 
+                    id: nav_icon1
+                    icon: "home"
+                    ripple_scale: 0
+                    user_font_size: "30sp"
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    on_release: 
+                        app.root.current = 'matching_page'
+                        app.process_matching_page()
+                MDIconButton: 
+                    id: nav_icon2
+                    icon: "message"
+                    ripple_scale: 0
+                    user_font_size: "30sp"
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    on_release: 
+                        app.chatlist_builder()
+                        app.root.current = 'msg-screen'
+                MDIconButton: 
+                    id: nav_icon3
+                    icon: "account"
+                    ripple_scale: 0
+                    user_font_size: "30sp"
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    on_release: 
+                        app.get_my_name()
+                        scr.current = 'profile_screen'
+                
+                # MDIconButton:
+                #     id: nav_icon4
+                #     icon: "magnify"
+                #     ripple_scale: 0
+                #     user_font_size: "30sp"
+                #     theme_text_color: "Custom"
+                #     text_color: 0, 0, 0, 1
+                #     on_release:
+                #         app.search_menu.open()
+                #         #scr.current = 'profile_screen'
+
+        MDTextFieldRound:
+            id: search_profile
+            hint_text: "Search"
+            foreground_color: 1, 0, 1, 1
+            size_hint_x: None
+            width: 150
+            pos_hint: {"center_x": 0.55, "top": 1}
+            
+        MDIconButton: 
+            id: search_profile_button
+            icon: 'magnify'
+            pos_hint: {"center_x": 0.8, "top": 1}
+            ripple_scale: 0
+            user_font_size: "20sp"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            on_release: 
+                app.root.current = 'search_profile'
+                app.display_search_profile()

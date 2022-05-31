@@ -1,0 +1,25 @@
+<ListWithImage>:
+    ImageLeftWidget:
+        source: root.imageSource
+
+<MatchingPage>:
+MDScreen:
+    name: 'matching_page'
+    id: matching_page
+    BoxLayout: 
+        
+        ScrollView:
+            MDList:
+                id: container
+                on_touch_down: 
+                    app.root.current = 'msg-screen'
+    MDFloatingActionButton: 
+        icon: "arrow-left"
+        pos_hint: {"center_y": .91}
+        user_font_size: "20sp"
+        theme_text_color: "Custom"
+        on_release: 
+            app.root.current = 'home_page'
+            
+
+           

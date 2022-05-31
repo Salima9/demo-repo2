@@ -1,0 +1,47 @@
+#: import demo demo.demo
+
+<MessageScreen>:
+MDScreen:
+    name:'msg-screen'
+    id: msg-screen
+    MDBoxLayout: 
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.bg_normal
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"center_y": .91}
+            user_font_size: "20sp"
+            theme_text_color: "Custom"
+            text_color: rgba(71, 92, 119, 255)
+            on_release: 
+                app.root.current = 'home_page'
+        MDToolbar: 
+            id: logoToolBar
+            height: 50
+            title: "Chat Page"
+            right_action_items: [['dots-vertical', lambda x: app.show_theme_picker()]]
+            margin: 0
+        
+
+        ScrollView:
+            do_scroll_y: True
+            effect_cls: 'ScrollEffect'
+            bar_width: 0
+            MDBoxLayout:
+                adaptive_height: True
+                orientation: 'vertical'
+                md_bg_color: app.theme_cls.primary_color
+                spacing: 20
+               
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    md_bg_color: app.theme_cls.bg_normal
+                    size_hint_y: None
+                    adaptive_height: True
+                    radius: [20, 20, 0, 0]
+                    padding: [0, 0, 0, 40]
+                    MDList:
+                        id: chatlist
+                        spacing: 10
+    

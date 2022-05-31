@@ -1,0 +1,302 @@
+MDScreen:
+    name:'home_page'
+    id: home_page
+    MDNavigationLayout:
+        ScreenManager:
+            id: sm
+            Screen:
+                id: home
+                name: 'home'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "Menu"
+                        elevation: 5
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state('toggle')]]
+                    Screen:
+                        BoxLayout:
+                            MDRoundFlatButton:
+                                text: "Publish AD"
+                                font_size: 12
+                                pos_hint: {"center_x": 0.5}
+                                on_press:
+                                    app.root.current = 'createSalesAD'
+                                    root.manager.transition.direction = 'left'
+                            MDRoundFlatButton:
+                                text: "Remove AD"
+                                font_size: 12
+                                pos_hint: {"center_x": 0.5}
+                                on_press:
+                                    app.root.current = 'removeAD'
+                                    root.manager.transition.direction = 'left'
+                    Widget:
+
+            Screen:
+                id: profile_screen
+                name: 'profile_screen'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "Menu"
+                        elevation: 5
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state('toggle')]]
+                    Screen:
+                        BoxLayout:
+                            orientation: 'vertical'
+                            spacing: '0dp'
+                            padding: '-100dp'
+                            MDLabel:
+                                text: 'Your Profile'
+                                font_size: 30
+                                halign: 'center'
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                padding_y: 15
+
+                            MDTextField:
+                                id: edit_user
+                                icon_right: "account"
+                                size_hint_x: None
+                                width: 200
+                                font_size: 14
+                                pos_hint: {'center_x': .5}
+                                multiline: False
+                                text:''
+                            MDTextField:
+                                hint_text:'Telephone Number'
+                                id: profile_phone
+                                icon_right: "phone"
+                                size_hint_x: None
+                                width: 200
+                                font_size: 14
+                                pos_hint: {'center_x': .5, 'center_y':.5}
+                                multiline: False
+                                text: ''
+                            MDTextField:
+                                id: profile_password
+                                icon_right: "eye-off"
+                                size_hint_x: None
+                                password: 'True'
+                                width: 200
+                                font_size: 14
+                                pos_hint: {'center_x': .5}
+                                multiline: False
+                                text: ''
+                            MDRectangleFlatIconButton:
+                                icon: "account-reactivate"
+                                text: 'Save'
+                                theme_text_color: "Custom"
+                                pos_hint: {'center_x': .5}
+                                on_release:
+                                    app.update_profile()
+
+                    Widget:
+
+            Screen:
+                id: your_ad
+                name: 'your_ad'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "Menu"
+                        elevation: 5
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state('toggle')]]
+                    ScrollView:
+                        MDList:
+                            id: container
+                            on_touch_down:
+                                sm.current = 'edit_ad_page'
+
+            Screen:
+                id: edit_ad_page
+                name: 'edit_ad_page'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "Menu"
+                        elevation: 5
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state('toggle')]]
+                    BoxLayout:
+                        id: edit_layout
+                        orientation: 'vertical'
+                        spacing: '10dp'
+                        padding: '10dp'
+                        MDTextField:
+                            hint_text:'Headline'
+                            id: edit_headline
+                            icon_right:
+                            size_hint_x: None
+                            width: 200
+                            pos_hint: {'center_x': .5}
+                            font_size: 12
+                            multiline: False
+                        MDTextField:
+                            hint_text:'Description'
+                            id: edit_description
+                            icon_right:
+                            size_hint_x: None
+                            width: 200
+                            pos_hint: {'center_x': .5}
+                            font_size: 12
+                            multiline: False
+
+                        MDTextField:
+                            hint_text:'Author'
+                            id: edit_author
+                            icon_right: "cell-phone"
+                            size_hint_x: None
+                            width: 200
+                            pos_hint: {'center_x': .5}
+                            font_size: 12
+                            multiline: False
+
+                        MDTextField:
+                            hint_text:'Category'
+                            id: edit_category
+                            icon_right: "cell-phone"
+                            size_hint_x: None
+                            width: 200
+                            pos_hint: {'center_x': .5}
+                            font_size: 12
+                            multiline: False
+
+                        MDTextField:
+                            hint_text:'Price'
+                            id: edit_price
+                            icon_right: "cell-phone"
+                            size_hint_x: None
+                            width: 200
+                            pos_hint: {'center_x': .5}
+                            font_size: 12
+                            multiline: False
+
+                        MDRectangleFlatIconButton:
+
+                            icon: "account-reactivate"
+                            text: 'Save'
+                            theme_text_color: "Custom"
+                            pos_hint: {'center_x': .5}
+                            on_release:
+                                app.clear_your_adlist()
+                                app.update_ad_input()
+                                sm.current = 'home'
+                                sm.transition.direction = 'right'
+            Screen:
+                id: whatchlist_screen
+                name: 'whatchlist_screen'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "Menu"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state('toggle')]]
+                    Screen:
+                        BoxLayout:
+                            orientation: 'vertical'
+                            spacing: '10dp'
+                            padding: '10dp'
+                            MDLabel:
+                                text: 'Your Watchlist'
+                                font_size: 30
+                                halign: 'center'
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                padding_y: 15
+
+                            MDCheckbox:
+                                size_hint: None, None
+                                size: "48dp", "48dp"
+                                pos_hint: {'center_x': 0.5, 'center_y': .75}
+                            MDLabel:
+                                text: "Book"
+                                pos_hint: {'center_x': 0.9, 'center_y': .75}
+                        
+                            MDCheckbox:
+                                size_hint: None, None
+                                size: "48dp", "48dp"
+                                pos_hint: {'center_x': 0.5, 'center_y': .6}
+                            MDLabel:
+                                text: "Notes"
+                                pos_hint: {'center_x': 0.9, 'center_y': .6}
+                            MDTextField:
+                                hint_text:'Subtype'
+                                id: subtype
+                                icon_right: "book-open-variant"
+                                size_hint_x: None
+                                width: 200
+                                font_size: 14
+                                pos_hint: {'center_x': .5, 'center_y':.4}
+                                multiline: True
+                                text: 'Welcome'
+                            MDTextField:
+                                hint_text:'Name of your choice'
+                                id: book_name
+                                icon_right: "book-open-variant"
+                                size_hint_x: None
+                                width: 200
+                                font_size: 14
+                                pos_hint: {'center_x': .5}
+                                multiline: False
+                                text: 'Welcome'
+                    Widget:
+                
+
+
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: '10dp'
+                padding: '10dp'
+                MDLabel:
+                    id: profile_name
+                    text: ''
+                    font_style: 'Caption'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                ScrollView:
+                    MDList:
+                        OneLineIconListItem:
+                            text: 'Profile'
+                            on_release:
+                                sm.current = 'profile_screen'
+                            IconLeftWidget:
+                                icon: 'account'
+
+                        OneLineIconListItem:
+                            id: log_out
+                            text: 'Log out'
+                            on_release:
+                                app.root.current = 'login'
+                                app.clear_your_adlist()
+                                app.reset()
+                            IconLeftWidget:
+                                icon: 'logout'
+
+                        OneLineIconListItem:
+                            text: 'Home'
+                            on_release:
+                                sm.current = 'home'
+                            IconLeftWidget:
+                                icon: 'home'
+
+                        OneLineIconListItem:
+                            text: 'Watchlist'
+                            on_release:
+                                sm.current = 'whatchlist_screen'
+                            IconLeftWidget:
+                                icon: 'star'
+
+                        OneLineIconListItem:
+                            text: 'Your Ads'
+                            on_release:
+                                app.clear_your_adlist()
+                                app.amount_ad()
+                                sm.current = 'your_ad'
+
+                            IconLeftWidget:
+                                icon: 'format-list-bulleted'
+
+
