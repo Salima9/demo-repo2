@@ -159,6 +159,8 @@ class MainApp(MDApp):
         self.sm.add_widget(Builder.load_file('matching_page.kv'))
         self.sm.add_widget(Builder.load_file('main-2.kv'))
         self.sm.add_widget(Builder.load_file('search_profile.kv'))
+        self.sm.add_widget(Builder.load_file('search_list.kv'))
+
 
         global SM
         SM = self.sm
@@ -341,7 +343,80 @@ class MainApp(MDApp):
         self.root.get_screen("search_profile").ids.search_cant_courses_1.text = (course_lst[3])
         self.root.get_screen("search_profile").ids.search_cant_courses_2.text = (course_lst[4])
 
+    def get_email_lst(self): 
+        search_word_1 = self.sm.get_screen('home_page').ids.search_profile.text     
+        c = mydb.cursor(dictionary=True)
+  
+        search_email = f"select * from courses where '{search_word_1}' IN(CanCourse_1, CanCourse_2, CanCourse_3)"
 
+        c.execute(search_email)
+        search_email_1 = c.fetchall()
+        print(search_email)
+        mydb.commit()
+        #student_email = list(map(lambda d: d['Email'], search_email_1))
+        #student_email_2 = student_email[0]
+
+        print(search_email_1)
+
+        entries = [dict(t) for t in {tuple(d.items()) for d in search_email_1}] #source:https://stackoverflow.com/a/9427216/12804377
+        # print(entries)
+        # remove own entry
+        for user in entries:
+            if user['Email'] == email:
+                entries.remove(user)
+                break
+        # Get name of those email addresses
+        for user in entries:
+            c = mydb.cursor(dictionary=True)
+            query = f"SELECT StudentName FROM students WHERE email = '{user['Email']}'"
+            c.execute(query)
+            result =  c.fetchall()
+            print(result)
+            if len(result) > 0:
+                user['Name'] = result[0]['StudentName'].strip()
+            else:
+                user['Name'] = user['Email']
+            mydb.commit()
+        print(entries)
+        return entries
+        
+    
+    # def get_names_lst(self): 
+    #     search_word_1 = self.sm.get_screen('home_page').ids.search_profile.text     
+    #     users_email = self.get_email_lst()
+    #     for user in users_email:
+    #         search_email = f"select * from courses where '{user}' IN(CanCourse_1, CanCourse_2, CanCourse_3)"
+
+    #     c.execute(search_email)
+    #     search_email_1 = c.fetchall()
+    #     print(search_email)
+    #     mydb.commit()
+    #     #student_email = list(map(lambda d: d['Email'], search_email_1))
+    #     #student_email_2 = student_email[0]
+
+    #     print(search_email_1)
+
+        
+        
+
+    def process_search_page(self):
+        users_email = self.get_email_lst()
+        for user in users_email:
+            courses_string = 'Can help with '
+            subjects = [user['CanCourse_1'], user['CanCourse_2'], user['CanCourse_3']]
+            for subject in subjects:
+                if subject == '' or subject == None:
+                    subjects.remove(subject)
+            courses_string += ', '.join(subjects)
+
+            SM.get_screen('search_list_page').ids.container.add_widget(
+                ListWithImage(
+                    text=user["Name"],
+                    secondary_text=user["Email"],
+                    tertiary_text=courses_string,
+                    imageSource="image-placeholder.png"
+                )
+            )
     
     """Chat functions"""
 
@@ -420,6 +495,8 @@ class MainApp(MDApp):
                     imageSource="image-placeholder.png"
                 )
             )
+    
+    
     """Socket chat
     # We cannot create chat screen with other screens, as it;s init method will start listening
     # for incoming connections, but at this stage connection is not being made yet, so we

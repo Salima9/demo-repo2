@@ -354,8 +354,8 @@ class Message(MDLabel):
 
 class SearchPopupMenu(): 
     """Search Box popar ut där man kan skriva in namn på den studenten man söker. Om namnet finns i databasen, en profil sida på den personen visas upp."""
-    def __init__(self, **kwargs):
-        super(SearchPopupMenu, self).__init__(**kwargs)
+    # def __init__(self, **kwargs):
+    #     super(SearchPopupMenu, self).__init__(**kwargs)
 
 
     # title = 'Search by name'
@@ -376,55 +376,76 @@ class SearchPopupMenu():
 
 
     
-    def search_student(self, search_name):
-        """Kollar om namnet som söks finns i databasen. Om den finns så returneras namnet"""
+    # def search_student(self, search_name):
+    #     """Kollar om namnet som söks finns i databasen. Om den finns så returneras namnet"""
+    #     c = mydb.cursor(dictionary=True) 
+    #     student_name = f"select StudentName from students where StudentName = '{search_name}'"
+    #     c.execute(student_name)
+    #     result_search_name = c.fetchone()
+    #     print(result_search_name)
+    #     mydb.commit()
+    #     student_name_1 = list(result_search_name.values())
+    #     student_name_2 = student_name_1[0]
+    #     print(student_name_1)
+    #     if str(search_name.upper()) == str(student_name_2.upper()): 
+    #         return student_name_2
+    #     else:
+    #         print("error")
+    #         #här kan göra såm som kollar om första bokstaven finns i databasen
+    
+    # def check_courses(self, word):
+    #     """"Kollar om namnet som söks finns i databasen. Om den finns så returneras lista av kurser"""
+    #     print(word)
+    #     search_email = f"select Email from courses where '{word}' IN(CanCourse_1, CanCourse_2, CanCourse_3)"
 
-        student_name = f"select StudentName from students where StudentName = '{search_name}'"
-        c.execute(student_name)
-        result_search_name = c.fetchone()
-        print(result_search_name)
-        mydb.commit()
-        student_name_1 = list(result_search_name.values())
-        student_name_2 = student_name_1[0]
-        print(student_name_1)
-        if str(search_name.upper()) == str(student_name_2.upper()): 
-            return student_name_2
-        else:
-            print("error")
-            #här kan göra såm som kollar om första bokstaven finns i databasen
         
+    #     c.execute(search_email)
+    #     search_email_1 = c.fetchall()
+    #     print(search_email)
+    #     mydb.commit()
+    #     student_email = list(map(lambda d: d['Email'], search_email_1))
+    #     #student_email_2 = student_email[0]
 
-        
+    #     print(student_email)
 
-        
+        # courses = f"select StudentName from students where Email = '{student_email_2}'"
+        # c.execute(courses)
+        # result = c.fetchone()
+        # mydb.commit()
+        # can_course_lst = list(result.values())
+        # return student_email 
 
-    def get_search_student_courses(self, student_name):
-        """"Kollar om namnet som söks finns i databasen. Om den finns så returneras lista av kurser"""
-        student_name_2 = self.search_student(student_name)
-        #print(search_lst[0])
-        #if str(student_name) == str(search_lst[0]): 
-        if str(student_name_2.upper()) == str(student_name.upper()):
-            c = mydb.cursor()
+    
+    # def get_search_student_courses(self, student_name):
+    #     """"Kollar om namnet som söks finns i databasen. Om den finns så returneras lista av kurser"""
+    #     student_name_2 = self.search_student(student_name)
+    #     #print(search_lst[0])
+    #     #if str(student_name) == str(search_lst[0]): 
+    #     if str(student_name_2.upper()) == str(student_name.upper()):
+    #         c = mydb.cursor()
 
-            search_email = f"select Email from students where StudentName = '{student_name}'"
-            c.execute(search_email)
-            search_email_1 = c.fetchone()
-            #print(result)
-            mydb.commit()
-            student_email = list(search_email_1.values())
-            student_email_1 = student_email[0]
+    #         search_email = f"select Email from students where StudentName = '{student_name}'"
+    #         c.execute(search_email)
+    #         search_email_1 = c.fetchone()
+    #         #print(result)
+    #         mydb.commit()
+    #         student_email = list(search_email_1.values())
+    #         student_email_1 = student_email[0]
 
-            courses = f"select CanCourse_1, CanCourse_2, CanCourse_3, NeedCourse_1, NeedCourse_2 from courses where Email = '{student_email_1}'"
-            c.execute(courses)
-            result = c.fetchone()
-            mydb.commit()
-            can_course_lst = list(result.values())
-            return can_course_lst
+    #         courses = f"select CanCourse_1, CanCourse_2, CanCourse_3, NeedCourse_1, NeedCourse_2 from courses where Email = '{student_email_1}'"
+    #         c.execute(courses)
+    #         result = c.fetchone()
+    #         mydb.commit()
+    #         can_course_lst = list(result.values())
+    #         return can_course_lst
 
 class ListWithImage(ThreeLineIconListItem):
     imageSource = StringProperty("string")
 
 class MatchingPage(Screen):
+    '''Matching Page Screen'''
+
+class SearchPage(Screen):
     '''Matching Page Screen'''
 
 

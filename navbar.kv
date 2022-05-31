@@ -239,6 +239,6 @@ MDScreen:
             user_font_size: "20sp"
             theme_text_color: "Custom"
             text_color: 0, 0, 0, 1
-            on_release: 
-                app.root.current = 'search_profile'
-                app.display_search_profile()
+            on_press: 
+                app.root.current = 'search_list_page'
+                app.process_search_page()
